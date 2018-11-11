@@ -1,0 +1,1 @@
+web: java -jar target/deposito-monografia-1.0.jar
