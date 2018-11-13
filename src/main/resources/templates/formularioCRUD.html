@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'formularioCRUD')}">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -57,7 +58,7 @@
             </div>
             <div class="form-group row">
                 <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
-                <a th:href="@{/}" class="btn btn-sm btn-default">Cancelar</a>
+                <a th:href="@{/formulario}" class="btn btn-sm btn-default">Cancelar</a>
             </div>
         </form>
     </div>

@@ -18,31 +18,31 @@ public class FormularioController {
     @Autowired
     private FormularioService service;
 
-    @GetMapping("/")
+    @GetMapping("/formulario")
     public ModelAndView findAll() {
 
-        ModelAndView mv = new ModelAndView("/formularioList");
+        ModelAndView mv = new ModelAndView("formularioList");
         mv.addObject("formularios", service.findAll());
 
         return mv;
     }
 
-    @GetMapping("/add")
+    @GetMapping("/formulario/add")
     public ModelAndView add(Formulario formulario) {
 
-        ModelAndView mv = new ModelAndView("/formularioCRUD");
+        ModelAndView mv = new ModelAndView("formularioCRUD");
         mv.addObject("formulario", formulario);
 
         return mv;
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/formulario/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id) {
 
         return add(service.findOne(id));
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/formulario/delete/{id}")
     public ModelAndView delete(@PathVariable("id") Long id) {
 
         service.delete(id);
@@ -50,7 +50,7 @@ public class FormularioController {
         return findAll();
     }
 
-    @PostMapping("/save")
+    @PostMapping("/formulario/save")
     public ModelAndView save(@Valid Formulario formulario, BindingResult result) {
 
         if(result.hasErrors()) {
