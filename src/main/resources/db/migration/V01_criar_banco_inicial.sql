@@ -1,171 +1,12 @@
 CREATE TABLE colecao (
-	id INTEGER NOT NULL,
+	id INTEGER PRIMARY KEY,
 	descricao VARCHAR(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO colecao (id, descricao) values (796, 'Trabalho de Conclusão de Curso - TCC Ciência da Computação (DCC)');
 
-CREATE TABLE tipo_documento (
-	id INTEGER PRIMARY KEY AUTO_INCREMENT,
-	descricao VARCHAR(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-INSERT INTO tipo_documento (descricao) values ('Trabalhos de conclusão de Iniciação científica');
-INSERT INTO tipo_documento (descricao) values ('Trabalhos de conclusão de Graduação');
-INSERT INTO tipo_documento (descricao) values ('Monografias de Especialização');
-INSERT INTO tipo_documento (descricao) values ('Dissertações de Mestrado (defendida e aprovada por banca especializada)');
-INSERT INTO tipo_documento (descricao) values ('Exames de Qualificação de Doutoramento');
-INSERT INTO tipo_documento (descricao) values ('Teses de Doutoramento (defendida e aprovada por banca especializada)');
-INSERT INTO tipo_documento (descricao) values ('Trabalhos de conclusão de pós doutorado');
-INSERT INTO tipo_documento (descricao) values ('Trabalhos de conclusão de outra natureza');
-
-CREATE TABLE pais (
-	valor VARCHAR(50) NOT NULL,
-	nome VARCHAR(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-INSERT INTO pais (valor, nome) values ('brasil', 'Brasil');
-INSERT INTO pais (valor, nome) values ('africa do sul', 'África do Sul');
-INSERT INTO pais (valor, nome) values ('alemanha', 'Alemanha');
-INSERT INTO pais (valor, nome) values ('angola', 'Angola');
-INSERT INTO pais (valor, nome) values ('argentina', 'Argentina');
-INSERT INTO pais (valor, nome) values ('australia', 'Austrália');
-INSERT INTO pais (valor, nome) values ('austria', 'Áustria');
-INSERT INTO pais (valor, nome) values ('belgica', 'Bélgica');
-INSERT INTO pais (valor, nome) values ('bolivia', 'Bolívia');
-INSERT INTO pais (valor, nome) values ('canada', 'Canadá');
-INSERT INTO pais (valor, nome) values ('chile', 'Chile');
-INSERT INTO pais (valor, nome) values ('china', 'China');
-INSERT INTO pais (valor, nome) values ('colombia', 'Colômbia');
-INSERT INTO pais (valor, nome) values ('espanha', 'Espanha');
-INSERT INTO pais (valor, nome) values ('estados unidos', 'Estados Unidos');
-INSERT INTO pais (valor, nome) values ('franca', 'França');
-INSERT INTO pais (valor, nome) values ('gra-bretanha', 'Grã-Bretanha');
-INSERT INTO pais (valor, nome) values ('holanda', 'Holanda');
-INSERT INTO pais (valor, nome) values ('italia', 'Itália');
-INSERT INTO pais (valor, nome) values ('mexico', 'México');
-INSERT INTO pais (valor, nome) values ('portugal', 'Portugal');
-INSERT INTO pais (valor, nome) values ('suica', 'Suiça');
-INSERT INTO pais (valor, nome) values ('uruguai', 'Uruguai');
-
-CREATE TABLE idioma (
-	valor VARCHAR(50) NOT NULL,
-	nome VARCHAR(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-INSERT INTO idioma (valor, nome) values ('pt_BR', 'Português');
-INSERT INTO idioma (valor, nome) values ('en', 'Inglês');
-INSERT INTO idioma (valor, nome) values ('fr', 'Francês');
-INSERT INTO idioma (valor, nome) values ('es', 'Espanhol');
-INSERT INTO idioma (valor, nome) values ('de', 'Alemão');
-INSERT INTO idioma (valor, nome) values ('ca', 'Catalão');
-INSERT INTO idioma (valor, nome) values ('nl', 'Holandês');
-INSERT INTO idioma (valor, nome) values ('it', 'Italiano');
-INSERT INTO idioma (valor, nome) values ('la', 'Latim');
-
-CREATE TABLE permissao_acesso (
-	valor VARCHAR(50) NOT NULL,
-	descricao VARCHAR(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-INSERT INTO permissao_acesso (valor, descricao) values ('acesso aberto', 'Acesso aberto');
-INSERT INTO permissao_acesso (valor, descricao) values ('1 mes', 'Embargado: 1 mês');
-INSERT INTO permissao_acesso (valor, descricao) values ('3 meses', 'Embargado: 3 meses');
-INSERT INTO permissao_acesso (valor, descricao) values ('6 meses', 'Embargado: 6 meses');
-INSERT INTO permissao_acesso (valor, descricao) values ('1 ano', 'Embargado: 1 ano');
-INSERT INTO permissao_acesso (valor, descricao) values ('5 anos', 'Embargado: 5 anos');
-INSERT INTO permissao_acesso (valor, descricao) values ('10 anos', 'Embargado: 10 anos');
-INSERT INTO permissao_acesso (valor, descricao) values ('restrito', 'Restrito');
-
-CREATE TABLE deposito (
-	id INTEGER PRIMARY KEY AUTO_INCREMENT,
-	colecao_id INTEGER NOT NULL FOREIGN KEY REFERENCES colecao(id),
-	tipo_documento_id INTEGER NOT NULL FOREIGN KEY REFERENCES tipo_documento(id),
-	multiplos_arquivos BOOLEAN,
-	autor_nome VARCHAR(50) NOT NULL,
-	autor_sobrenome VARCHAR(150) NOT NULL,
-	orientador_nome VARCHAR(50),
-	orientador_sobrenome VARCHAR(150),
-	titulo VARCHAR(200) NOT NULL,
-  mes_defesa INTEGER,
-	dia_defesa INTEGER,
-	ano_defesa INTEGER NOT NULL,
-	pais VARCHAR(50) NOT NULL,
-	idioma VARCHAR(50) NOT NULL,
-	agencia_fomento VARCHAR(400),
-	permissao_acesso VARCHAR(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE co_orientador (
-	id INTEGER PRIMARY KEY AUTO_INCREMENT,
-	deposito_id INTEGER NOT NULL FOREIGN KEY REFERENCES deposito(id),
-	nome VARCHAR(50) NOT NULL,
-	sobrenome VARCHAR(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE membro_banca (
-	id INTEGER PRIMARY KEY AUTO_INCREMENT,
-	deposito_id INTEGER NOT NULL FOREIGN KEY REFERENCES deposito(id),
-	nome VARCHAR(50) NOT NULL,
-	sobrenome VARCHAR(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE faculdade_instituicao_departamento (
-	id INTEGER PRIMARY KEY AUTO_INCREMENT,
-	deposito_id INTEGER NOT NULL FOREIGN KEY REFERENCES deposito(id),
-	nome VARCHAR(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE programa_pos_graduacao (
-	id INTEGER PRIMARY KEY AUTO_INCREMENT,
-	deposito_id INTEGER NOT NULL FOREIGN KEY REFERENCES deposito(id),
-	nome VARCHAR(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE sigla_instituicao (
-	id INTEGER PRIMARY KEY AUTO_INCREMENT,
-	deposito_id INTEGER NOT NULL FOREIGN KEY REFERENCES deposito(id),
-	nome VARCHAR(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE tipo_identificacao (
-	id INTEGER PRIMARY KEY AUTO_INCREMENT,
-	valor VARCHAR(50) NOT NULL,
-	descricao VARCHAR(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-INSERT INTO tipo_identificacao (valor, descricao) values ('issn', 'ISSN');
-INSERT INTO tipo_identificacao (valor, descricao) values ('other', 'Outro');
-INSERT INTO tipo_identificacao (valor, descricao) values ('uri', 'URI');
-INSERT INTO tipo_identificacao (valor, descricao) values ('isbn', 'ISBN');
-
-CREATE TABLE identificacao (
-	id INTEGER PRIMARY KEY AUTO_INCREMENT,
-	tipo_identificacao_id INTEGER NOT NULL FOREIGN KEY REFERENCES tipo_identificacao(id),
-	deposito_id INTEGER NOT NULL FOREIGN KEY REFERENCES deposito(id),
-	descricao VARCHAR(200)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE palavra_chave (
-	id INTEGER PRIMARY KEY AUTO_INCREMENT,
-	deposito_id INTEGER NOT NULL FOREIGN KEY REFERENCES deposito(id),
-	descricao VARCHAR(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE area_conhecimento (
-	id INTEGER PRIMARY KEY AUTO_INCREMENT,
-	deposito_id INTEGER NOT NULL FOREIGN KEY REFERENCES deposito(id),
-	descricao VARCHAR(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE resumo (
-	id INTEGER PRIMARY KEY AUTO_INCREMENT,
-	deposito_id INTEGER NOT NULL FOREIGN KEY REFERENCES deposito(id),
-	descricao VARCHAR(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE tipo_arquivo (
-	id INTEGER,
+	id INTEGER PRIMARY KEY,
 	descricao VARCHAR(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -241,10 +82,86 @@ INSERT INTO tipo_arquivo (id, descricao) values (63, 'Writer 6.0 global document
 INSERT INTO tipo_arquivo (id, descricao) values (56, 'Writer 6.0 templates (conhecido)');
 INSERT INTO tipo_arquivo (id, descricao) values (4, 'XML (conhecido)');
 
+CREATE TABLE deposito (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	colecao_id INTEGER NOT NULL FOREIGN KEY REFERENCES colecao(id),
+	tipo_documento VARCHAR(100) NOT NULL,
+	multiplos_arquivos BOOLEAN,
+	autor_nome VARCHAR(100) NOT NULL,
+	autor_sobrenome VARCHAR(100) NOT NULL,
+	orientador_nome VARCHAR(100),
+	orientador_sobrenome VARCHAR(100),
+	titulo VARCHAR(200) NOT NULL,
+	mes_defesa INTEGER,
+	dia_defesa INTEGER,
+	ano_defesa INTEGER NOT NULL,
+	pais VARCHAR(20) NOT NULL,
+	idioma VARCHAR(20) NOT NULL,
+	agencia_fomento VARCHAR(400),
+	permissao_acesso VARCHAR(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE co_orientador (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	deposito_id BIGINT NOT NULL FOREIGN KEY REFERENCES deposito(id),
+	nome VARCHAR(100) NOT NULL,
+	sobrenome VARCHAR(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE membro_banca (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	deposito_id BIGINT NOT NULL FOREIGN KEY REFERENCES deposito(id),
+	nome VARCHAR(100) NOT NULL,
+	sobrenome VARCHAR(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE faculdade_instituicao_departamento (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	deposito_id BIGINT NOT NULL FOREIGN KEY REFERENCES deposito(id),
+	nome VARCHAR(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE programa_pos_graduacao (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	deposito_id BIGINT NOT NULL FOREIGN KEY REFERENCES deposito(id),
+	nome VARCHAR(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE sigla_instituicao (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	deposito_id BIGINT NOT NULL FOREIGN KEY REFERENCES deposito(id),
+	nome VARCHAR(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE identificacao (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	deposito_id BIGINT NOT NULL FOREIGN KEY REFERENCES deposito(id),
+	tipo VARCHAR(10) NOT NULL,
+	descricao VARCHAR(200)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE palavra_chave (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	deposito_id BIGINT NOT NULL FOREIGN KEY REFERENCES deposito(id),
+	descricao VARCHAR(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE area_conhecimento (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	deposito_id BIGINT NOT NULL FOREIGN KEY REFERENCES deposito(id),
+	descricao VARCHAR(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE resumo (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	deposito_id BIGINT NOT NULL FOREIGN KEY REFERENCES deposito(id),
+	descricao VARCHAR(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE arquivo (
-	id INTEGER PRIMARY KEY AUTO_INCREMENT,
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
 	tipo_arquivo_id INTEGER NOT NULL FOREIGN KEY REFERENCES tipo_arquivo(id),
-	deposito_id INTEGER NOT NULL FOREIGN KEY REFERENCES deposito(id),
+	deposito_id BIGINT NOT NULL FOREIGN KEY REFERENCES deposito(id),
 	arquivo BYTEA NOT NULL,
 	descricao VARCHAR(200),
 	formato VARCHAR(200)
