@@ -1,14 +1,14 @@
 CREATE TABLE colecao (
 	id INTEGER PRIMARY KEY,
 	descricao VARCHAR(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 INSERT INTO colecao (id, descricao) values (796, 'Trabalho de Conclusão de Curso - TCC Ciência da Computação (DCC)');
 
 CREATE TABLE tipo_arquivo (
 	id INTEGER PRIMARY KEY,
 	descricao VARCHAR(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 INSERT INTO tipo_arquivo (id, descricao) values (3, 'Adobe PDF (conhecido)');
 INSERT INTO tipo_arquivo (id, descricao) values (19, 'AIFF (conhecido)');
@@ -83,8 +83,8 @@ INSERT INTO tipo_arquivo (id, descricao) values (56, 'Writer 6.0 templates (conh
 INSERT INTO tipo_arquivo (id, descricao) values (4, 'XML (conhecido)');
 
 CREATE TABLE deposito (
-	id BIGINT PRIMARY KEY AUTO_INCREMENT,
-	colecao_id INTEGER NOT NULL FOREIGN KEY REFERENCES colecao(id),
+	id BIGSERIAL PRIMARY KEY,
+	colecao_id INTEGER NOT NULL REFERENCES colecao(id),
 	tipo_documento VARCHAR(100) NOT NULL,
 	multiplos_arquivos BOOLEAN,
 	autor_nome VARCHAR(100) NOT NULL,
@@ -99,70 +99,70 @@ CREATE TABLE deposito (
 	idioma VARCHAR(20) NOT NULL,
 	agencia_fomento VARCHAR(400),
 	permissao_acesso VARCHAR(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 CREATE TABLE co_orientador (
-	id BIGINT PRIMARY KEY AUTO_INCREMENT,
-	deposito_id BIGINT NOT NULL FOREIGN KEY REFERENCES deposito(id),
+	id BIGSERIAL PRIMARY KEY,
+	deposito_id BIGINT NOT NULL REFERENCES deposito(id),
 	nome VARCHAR(100) NOT NULL,
 	sobrenome VARCHAR(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 CREATE TABLE membro_banca (
-	id BIGINT PRIMARY KEY AUTO_INCREMENT,
-	deposito_id BIGINT NOT NULL FOREIGN KEY REFERENCES deposito(id),
+	id BIGSERIAL PRIMARY KEY,
+	deposito_id BIGINT NOT NULL REFERENCES deposito(id),
 	nome VARCHAR(100) NOT NULL,
 	sobrenome VARCHAR(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 CREATE TABLE faculdade_instituicao_departamento (
-	id BIGINT PRIMARY KEY AUTO_INCREMENT,
-	deposito_id BIGINT NOT NULL FOREIGN KEY REFERENCES deposito(id),
+	id BIGSERIAL PRIMARY KEY,
+	deposito_id BIGINT NOT NULL REFERENCES deposito(id),
 	nome VARCHAR(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 CREATE TABLE programa_pos_graduacao (
-	id BIGINT PRIMARY KEY AUTO_INCREMENT,
-	deposito_id BIGINT NOT NULL FOREIGN KEY REFERENCES deposito(id),
+	id BIGSERIAL PRIMARY KEY,
+	deposito_id BIGINT NOT NULL REFERENCES deposito(id),
 	nome VARCHAR(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 CREATE TABLE sigla_instituicao (
-	id BIGINT PRIMARY KEY AUTO_INCREMENT,
-	deposito_id BIGINT NOT NULL FOREIGN KEY REFERENCES deposito(id),
+	id BIGSERIAL PRIMARY KEY,
+	deposito_id BIGINT NOT NULL REFERENCES deposito(id),
 	nome VARCHAR(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 CREATE TABLE identificacao (
-	id BIGINT PRIMARY KEY AUTO_INCREMENT,
-	deposito_id BIGINT NOT NULL FOREIGN KEY REFERENCES deposito(id),
+	id BIGSERIAL PRIMARY KEY,
+	deposito_id BIGINT NOT NULL REFERENCES deposito(id),
 	tipo VARCHAR(10) NOT NULL,
 	descricao VARCHAR(200)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 CREATE TABLE palavra_chave (
-	id BIGINT PRIMARY KEY AUTO_INCREMENT,
-	deposito_id BIGINT NOT NULL FOREIGN KEY REFERENCES deposito(id),
+	id BIGSERIAL PRIMARY KEY,
+	deposito_id BIGINT NOT NULL REFERENCES deposito(id),
 	descricao VARCHAR(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 CREATE TABLE area_conhecimento (
-	id BIGINT PRIMARY KEY AUTO_INCREMENT,
-	deposito_id BIGINT NOT NULL FOREIGN KEY REFERENCES deposito(id),
+	id BIGSERIAL PRIMARY KEY,
+	deposito_id BIGINT NOT NULL REFERENCES deposito(id),
 	descricao VARCHAR(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 CREATE TABLE resumo (
-	id BIGINT PRIMARY KEY AUTO_INCREMENT,
-	deposito_id BIGINT NOT NULL FOREIGN KEY REFERENCES deposito(id),
+	id BIGSERIAL PRIMARY KEY,
+	deposito_id BIGINT NOT NULL REFERENCES deposito(id),
 	descricao VARCHAR(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 CREATE TABLE arquivo (
-	id BIGINT PRIMARY KEY AUTO_INCREMENT,
-	tipo_arquivo_id INTEGER NOT NULL FOREIGN KEY REFERENCES tipo_arquivo(id),
-	deposito_id BIGINT NOT NULL FOREIGN KEY REFERENCES deposito(id),
+	id BIGSERIAL PRIMARY KEY,
+	tipo_arquivo_id INTEGER NOT NULL REFERENCES tipo_arquivo(id),
+	deposito_id BIGINT NOT NULL REFERENCES deposito(id),
 	arquivo BYTEA NOT NULL,
 	descricao VARCHAR(200),
 	formato VARCHAR(200)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
