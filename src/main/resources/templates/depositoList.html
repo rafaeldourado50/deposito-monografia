@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'formularioList')}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'depositoList')}">
 
 <body>
 <div class="panel panel-default">
     <div class="panel-heading">
-        <strong>Formulários</strong>
+        <strong>Depósitos</strong>
     </div>
     <div class="panel-body">
         <div class="table-responsive">
@@ -19,15 +19,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="formulario : ${posts}">
-                    <td th:text="${formulario.id}"></td>
-                    <td th:text="${formulario.autor}"></td>
-                    <td th:text="${formulario.titulo}"></td>
-                    <td th:text="${#dates.format(formulario.data, 'dd/MM/yyyy')}"></td>
+                <tr th:each="deposito : ${posts}">
+                    <td th:text="${deposito.id}"></td>
+                    <td th:text="${deposito.autor}"></td>
+                    <td th:text="${deposito.titulo}"></td>
+                    <td th:text="${#dates.format(deposito.data, 'dd/MM/yyyy')}"></td>
                     <td>
                         <div class="btn-group pull-right">
-                            <a class="btn btn-sm btn-primary" th:href="@{/edit/{id}(id=${formulario.id})}" >Editar</a>
-                            <a class="delete btn btn-sm btn-danger" th:href="@{/delete/{id}(id=${formulario.id})}">Excluir</a>
+                            <a class="btn btn-sm btn-primary" th:href="@{/edit/{id}(id=${deposito.id})}" >Editar</a>
+                            <a class="delete btn btn-sm btn-danger" th:href="@{/delete/{id}(id=${deposito.id})}">Excluir</a>
                         </div>
                     </td>
                 </tr>
@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="panel-footer">
-        <a class="btn btn-sm btn-success" th:href="@{/formulario/add/}" >Adicionar</a>
+        <a class="btn btn-sm btn-success" th:href="@{/deposito/add/}" >Adicionar</a>
     </div>
 </div>
 </body>

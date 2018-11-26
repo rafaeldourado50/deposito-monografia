@@ -2,8 +2,8 @@ package br.ufba.depositomonografia.controller;
 
 import javax.validation.Valid;
 
-import br.ufba.depositomonografia.model.Formulario;
-import br.ufba.depositomonografia.service.FormularioService;
+import br.ufba.depositomonografia.model.Deposito;
+import br.ufba.depositomonografia.service.DepositoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,36 +13,36 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class FormularioController {
+public class DepositoController {
 
     @Autowired
-    private FormularioService service;
+    private DepositoService service;
 
-    @GetMapping("/formulario")
+    @GetMapping("/deposito")
     public ModelAndView findAll() {
 
-        ModelAndView mv = new ModelAndView("formularioList");
-        mv.addObject("formularios", service.findAll());
+        ModelAndView mv = new ModelAndView("depositoList");
+        mv.addObject("depositos", service.findAll());
 
         return mv;
     }
 
-    @GetMapping("/formulario/add")
-    public ModelAndView add(Formulario formulario) {
+    @GetMapping("/deposito/add")
+    public ModelAndView add(Deposito deposito) {
 
-        ModelAndView mv = new ModelAndView("formularioCRUD");
-        mv.addObject("formulario", formulario);
+        ModelAndView mv = new ModelAndView("depositoCRUD");
+        mv.addObject("deposito", deposito);
 
         return mv;
     }
 
-    @GetMapping("/formulario/edit/{id}")
+    @GetMapping("/deposito/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id) {
 
         return add(service.findOne(id));
     }
 
-    @GetMapping("/formulario/delete/{id}")
+    @GetMapping("/deposito/delete/{id}")
     public ModelAndView delete(@PathVariable("id") Long id) {
 
         service.delete(id);
@@ -50,14 +50,14 @@ public class FormularioController {
         return findAll();
     }
 
-    @PostMapping("/formulario/save")
-    public ModelAndView save(@Valid Formulario formulario, BindingResult result) {
+    @PostMapping("/deposito/save")
+    public ModelAndView save(@Valid Deposito deposito, BindingResult result) {
 
         if(result.hasErrors()) {
-            return add(formulario);
+            return add(deposito);
         }
 
-        service.save(formulario);
+        service.save(deposito);
 
         return findAll();
     }

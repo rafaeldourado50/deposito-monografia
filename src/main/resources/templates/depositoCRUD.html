@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'formularioCRUD')}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'depositoCRUD')}">
 
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Cadastro de Formulário</title>
+    <title>Cadastro de Depósito</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="panel panel-default">
     <div class="panel-heading">
-        <strong>Cadastro de Formulários</strong>
+        <strong>Cadastro de Depósitos</strong>
     </div>
     <div class="panel-body">
-        <form class="form-horizontal" th:object="${formulario}" th:action="@{/save}" method="POST" style="margin: 10px">
+        <form class="form-horizontal" th:object="${deposito}" th:action="@{/save}" method="POST" style="margin: 10px">
             <div class="form-group">
                 <fieldset>
                     <div class="form-group row">
@@ -58,7 +58,7 @@
             </div>
             <div class="form-group row">
                 <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
-                <a th:href="@{/formulario}" class="btn btn-sm btn-default">Cancelar</a>
+                <a th:href="@{/deposito}" class="btn btn-sm btn-default">Cancelar</a>
             </div>
         </form>
     </div>
