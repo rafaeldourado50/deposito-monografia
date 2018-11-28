@@ -15,15 +15,15 @@
                     <th>Autor</th>
                     <th>Título</th>
                     <th>Data</th>
-                    <th></th>
+                    <th>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="deposito : ${posts}">
+                <tr th:each="deposito : ${depositos}">
                     <td th:text="${deposito.id}"></td>
-                    <td th:text="${deposito.autor}"></td>
+                    <td th:text="${deposito.autorNome}"></td>
                     <td th:text="${deposito.titulo}"></td>
-                    <td th:text="${#dates.format(deposito.data, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${deposito.anoDefesa}"></td>
                     <td>
                         <div class="btn-group pull-right">
                             <a class="btn btn-sm btn-primary" th:href="@{/edit/{id}(id=${deposito.id})}" >Editar</a>

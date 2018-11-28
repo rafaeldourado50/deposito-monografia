@@ -2,7 +2,12 @@ package br.ufba.depositomonografia.controller;
 
 import javax.validation.Valid;
 
+import br.ufba.depositomonografia.dominio.Idioma;
+import br.ufba.depositomonografia.dominio.Pais;
+import br.ufba.depositomonografia.dominio.PermissaoAcesso;
+import br.ufba.depositomonografia.dominio.TipoDocumento;
 import br.ufba.depositomonografia.model.Deposito;
+import br.ufba.depositomonografia.service.ColecaoService;
 import br.ufba.depositomonografia.service.DepositoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +23,9 @@ public class DepositoController {
     @Autowired
     private DepositoService service;
 
+    @Autowired
+    private ColecaoService colecaoService;
+
     @GetMapping("/deposito")
     public ModelAndView findAll() {
 
@@ -32,7 +40,11 @@ public class DepositoController {
 
         ModelAndView mv = new ModelAndView("depositoCRUD");
         mv.addObject("deposito", deposito);
-
+        mv.addObject("colecoes", colecaoService.findAll());
+        mv.addObject("idiomas", Idioma.values());
+        mv.addObject("paises", Pais.values());
+        mv.addObject("tipos", TipoDocumento.values());
+        mv.addObject("permissoes", PermissaoAcesso.values());
         return mv;
     }
 

@@ -13,7 +13,6 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "colecao")
-@Getter
 @EqualsAndHashCode(of = {"id"})
 @ToString
 public class Colecao {
@@ -24,4 +23,12 @@ public class Colecao {
     @NotNull
     @Setter
     private String descricao;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
 }

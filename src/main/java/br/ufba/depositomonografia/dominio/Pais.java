@@ -26,7 +26,19 @@ public enum Pais {
     SUICA("suica", "Suiça"),
     URUGUAI("uruguai", "Uruguai");
 
-    Pais(String valor, String descricao) {
+    private String valor;
+    private String descricao;
 
+    Pais(String valor, String descricao) {
+        this.valor = valor;
+        this.descricao = descricao;
+    }
+
+    public String getValor() {
+        return valor;
+    }
+
+    public String getDescricao() {
+        return descricao;
     }
 }

@@ -12,10 +12,10 @@
 <body>
 <div class="panel panel-default">
     <div class="panel-heading">
-        <strong>Cadastro de Depósitos</strong>
+        <strong>Novo Depósito</strong>
     </div>
     <div class="panel-body">
-        <form class="form-horizontal" th:object="${deposito}" th:action="@{/save}" method="POST" style="margin: 10px">
+        <form class="form-horizontal" th:object="${deposito}" th:action="@{/deposito/save}" method="POST" style="margin: 10px">
             <div class="form-group">
                 <fieldset>
                     <div class="form-group row">
@@ -26,32 +26,82 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-1">
-                            <input type="text" class="form-control input-sm" id="id" th:field="*{id}" readOnly="readonly"/>
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('colecao')}? 'has-error'">
+                            <label>Coleção</label>
+                            <select class="form-control" th:field="*{colecao}">
+                                <option value="" selected="selected">Selecione</option>
+                                <option th:each="colecao : ${colecoes}" th:value="${colecao}" th:text="${colecao.descricao}"></option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-4" th:classappend="${#fields.hasErrors('autor')}? 'has-error'">
-                            <label>Autor</label>
-                            <input type="text" class="form-control input-sm" th:field="*{autor}" autofocus="autofocus" placeholder="Informe o autor" maxlength="50"/>
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('autorNome')}? 'has-error'">
+                            <label>Nome do Autor</label>
+                            <input type="text" class="form-control input-sm" th:field="*{autorNome}"/>
+                        </div>
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('autorSobrenome')}? 'has-error'">
+                            <label>Sobrenome do Autor</label>
+                            <input type="text" class="form-control input-sm" th:field="*{autorSobrenome}"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('orientadorNome')}? 'has-error'">
+                            <label>Nome do Orientador</label>
+                            <input type="text" class="form-control input-sm" th:field="*{orientadorNome}"/>
+                        </div>
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('orientadorSobrenome')}? 'has-error'">
+                            <label>Sobrenome do Orientador</label>
+                            <input type="text" class="form-control input-sm" th:field="*{orientadorSobrenome}"/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-4" th:classappend="${#fields.hasErrors('titulo')}? 'has-error'">
                             <label>T&iacute;tulo</label>
-                            <input type="text" class="form-control input-sm" th:field="*{titulo}" maxlength="150" placeholder="Informe o título"/>
+                            <input type="text" class="form-control input-sm" th:field="*{titulo}" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-2" th:classappend="${#fields.hasErrors('data')}? 'has-error'">
-                            <label>Data</label>
-                            <input type="date" class="form-control input-sm" th:field="*{data}"/>
+                        <div class="col-md-2" th:classappend="${#fields.hasErrors('diaDefesa')}? 'has-error'">
+                            <label>Dia da Defesa</label>
+                            <input type="text" class="form-control input-sm" th:field="*{diaDefesa}"/>
+                        </div>
+                        <div class="col-md-2" th:classappend="${#fields.hasErrors('mesDefesa')}? 'has-error'">
+                            <label>Mês da Defesa</label>
+                            <input type="text" class="form-control input-sm" th:field="*{mesDefesa}"/>
+                        </div>
+                        <div class="col-md-2" th:classappend="${#fields.hasErrors('anoDefesa')}? 'has-error'">
+                            <label>Ano da Defesa</label>
+                            <input type="text" class="form-control input-sm" th:field="*{anoDefesa}"/>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-4" th:classappend="${#fields.hasErrors('texto')}? 'has-error'">
-                            <label>Texto</label>
-                            <textarea class="form-control input-sm" th:field="*{texto}" cols="5" rows="5" placeholder="Informe o texto"></textarea>
+                        <div class="col-md-2" th:classappend="${#fields.hasErrors('idioma')}? 'has-error'">
+                            <label>Idioma</label>
+                            <select class="form-control" th:field="*{idioma}">
+                                <option th:each="idioma : ${idiomas}" th:value="${idioma}" th:text="${idioma.descricao}"></option>
+                            </select>
+                        </div>
+                        <div class="col-md-2" th:classappend="${#fields.hasErrors('pais')}? 'has-error'">
+                            <label>País</label>
+                            <select class="form-control" th:field="*{pais}">
+                                <option th:each="pais : ${paises}" th:value="${pais}" th:text="${pais.descricao}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('tipoDocumento')}? 'has-error'">
+                            <label>Tipo do Documento</label>
+                            <select class="form-control" th:field="*{tipoDocumento}">
+                                <option th:each="tipoDocumento : ${tipos}" th:value="${tipoDocumento}" th:text="${tipoDocumento.descricao}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3" th:classappend="${#fields.hasErrors('permissaoAcesso')}? 'has-error'">
+                            <label>Permissão de Acesso</label>
+                            <select class="form-control" th:field="*{permissaoAcesso}">
+                                <option th:each="permissaoAcesso : ${permissoes}" th:value="${permissaoAcesso}" th:text="${permissaoAcesso.descricao}"></option>
+                            </select>
                         </div>
                     </div>
                 </fieldset>

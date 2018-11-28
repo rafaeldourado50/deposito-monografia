@@ -11,7 +11,13 @@ public enum TipoDocumento {
     POS_DOUTORADO("Trabalhos de conclusão de pós doutorado"),
     OUTRA_NATUREZA("Trabalhos de conclusão de outra natureza");
 
-    TipoDocumento(String descricao) {
+    private String descricao;
 
+    TipoDocumento(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getDescricao() {
+        return descricao;
     }
 }

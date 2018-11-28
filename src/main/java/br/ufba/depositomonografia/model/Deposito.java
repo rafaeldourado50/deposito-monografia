@@ -2,6 +2,7 @@ package br.ufba.depositomonografia.model;
 
 import javax.persistence.*;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import br.ufba.depositomonografia.dominio.*;
@@ -13,7 +14,6 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "deposito")
-@Getter
 @EqualsAndHashCode(exclude = {"colecao"})
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,13 +23,13 @@ public class Deposito {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotNull(message = "Coleção é uma informação obrigatória.")
     @Setter
     @ManyToOne
     @JoinColumn(name = "colecao_id")
     private Colecao colecao;
 
-    @NotNull
+    @NotNull(message = "Tipo do Documento é uma informação obrigatória.")
     @Setter
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_documento")
@@ -39,12 +39,14 @@ public class Deposito {
     @Column(name = "multiplos_arquivos")
     private Boolean multiplosArquivos;
 
-    @NotNull
+    @NotNull(message = "O Nome do Autor é uma informação obrigatória.")
+    @NotBlank(message = "O Nome do Autor não pode ser vazio.")
     @Setter
     @Column(name = "autor_nome")
     private String autorNome;
 
-    @NotNull
+    @NotNull(message = "O Sobrenome do Autor é uma informação obrigatória.")
+    @NotBlank(message = "O Sobrenome do Autor não pode ser vazio.")
     @Setter
     @Column(name = "autor_sobrenome")
     private String autorSobrenome;
@@ -57,7 +59,8 @@ public class Deposito {
     @Column(name = "orientador_sobrenome")
     private String orientadorSobrenome;
 
-    @NotNull
+    @NotNull(message = "Título é uma informação obrigatória.")
+    @NotBlank(message = "Título não pode ser vazio.")
     @Setter
     @Column(name = "titulo")
     private String titulo;
@@ -70,18 +73,18 @@ public class Deposito {
     @Column(name = "dia_defesa")
     private Integer diaDefesa;
 
-    @NotNull
+    @NotNull(message = "Ano de Defesa é uma informação obrigatória.")
     @Setter
     @Column(name = "ano_defesa")
     private Integer anoDefesa;
 
-    @NotNull
+    @NotNull(message = "País é uma informação obrigatória.")
     @Setter
     @Enumerated(EnumType.STRING)
     @Column(name = "pais")
     private Pais pais;
 
-    @NotNull
+    @NotNull(message = "Idioma é uma informação obrigatória.")
     @Setter
     @Enumerated(EnumType.STRING)
     @Column(name = "idioma")
@@ -91,9 +94,73 @@ public class Deposito {
     @Column(name = "agencia_fomento")
     private String agenciaFomento;
 
-    @NotNull
+    @NotNull(message = "Permissão de Acesso é uma informação obrigatória.")
     @Setter
     @Enumerated(EnumType.STRING)
     @Column(name = "permissao_acesso")
     private PermissaoAcesso permissaoAcesso;
+
+    public Long getId() {
+        return id;
+    }
+
+    public Colecao getColecao() {
+        return colecao;
+    }
+
+    public TipoDocumento getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public Boolean getMultiplosArquivos() {
+        return multiplosArquivos;
+    }
+
+    public String getAutorNome() {
+        return autorNome;
+    }
+
+    public String getAutorSobrenome() {
+        return autorSobrenome;
+    }
+
+    public String getOrientadorNome() {
+        return orientadorNome;
+    }
+
+    public String getOrientadorSobrenome() {
+        return orientadorSobrenome;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public Integer getMesDefesa() {
+        return mesDefesa;
+    }
+
+    public Integer getDiaDefesa() {
+        return diaDefesa;
+    }
+
+    public Integer getAnoDefesa() {
+        return anoDefesa;
+    }
+
+    public Pais getPais() {
+        return pais;
+    }
+
+    public Idioma getIdioma() {
+        return idioma;
+    }
+
+    public String getAgenciaFomento() {
+        return agenciaFomento;
+    }
+
+    public PermissaoAcesso getPermissaoAcesso() {
+        return permissaoAcesso;
+    }
 }
