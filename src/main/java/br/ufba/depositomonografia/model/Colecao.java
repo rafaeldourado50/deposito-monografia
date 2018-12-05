@@ -6,29 +6,37 @@ import javax.persistence.Table;
 
 import javax.validation.constraints.NotNull;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 @Entity
 @Table(name = "colecao")
-@EqualsAndHashCode(of = {"id"})
-@ToString
 public class Colecao {
 
     @Id
-    private Integer id;
+    private Long id;
 
     @NotNull
-    @Setter
     private String descricao;
 
-    public Integer getId() {
+    public Colecao() {
+    }
+
+    public Colecao(Long id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;
+    }
+
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDescricao() {
         return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }

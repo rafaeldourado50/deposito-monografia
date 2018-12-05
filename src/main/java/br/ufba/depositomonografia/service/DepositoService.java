@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.ufba.depositomonografia.model.Deposito;
 import br.ufba.depositomonografia.repository.DepositoRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,8 @@ public class DepositoService {
         return repository.getOne(id);
     }
 
-    public Deposito save(Deposito Deposito) {
-        return repository.saveAndFlush(Deposito);
+    public Deposito save(Deposito deposito) {
+        return repository.saveAndFlush(deposito);
     }
 
     public void delete(Long id) {

@@ -10,18 +10,8 @@ import javax.persistence.Table;
 
 import javax.validation.constraints.NotNull;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 @Entity
 @Table(name = "arquivo")
-@Getter
-@EqualsAndHashCode(exclude = {"tipoArquivo", "deposito"})
-@NoArgsConstructor
-@AllArgsConstructor
 public class Arquivo {
 
     @Id
@@ -29,24 +19,78 @@ public class Arquivo {
     private Long id;
 
     @NotNull
-    @Setter
     @ManyToOne
     @JoinColumn(name = "tipo_arquivo_id")
     private TipoArquivo tipoArquivo;
 
     @NotNull
-    @Setter
     @ManyToOne
     @JoinColumn(name = "deposito_id")
     private Deposito deposito;
 
     @NotNull
-    @Setter
     private Byte arquivo;
 
-    @Setter
     private String descricao;
 
-    @Setter
     private String formato;
+
+    public Arquivo() {
+    }
+
+    public Arquivo(TipoArquivo tipoArquivo, Deposito deposito, Byte arquivo, String descricao, String formato) {
+        this.tipoArquivo = tipoArquivo;
+        this.deposito = deposito;
+        this.arquivo = arquivo;
+        this.descricao = descricao;
+        this.formato = formato;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public TipoArquivo getTipoArquivo() {
+        return tipoArquivo;
+    }
+
+    public void setTipoArquivo(TipoArquivo tipoArquivo) {
+        this.tipoArquivo = tipoArquivo;
+    }
+
+    public Deposito getDeposito() {
+        return deposito;
+    }
+
+    public void setDeposito(Deposito deposito) {
+        this.deposito = deposito;
+    }
+
+    public Byte getArquivo() {
+        return arquivo;
+    }
+
+    public void setArquivo(Byte arquivo) {
+        this.arquivo = arquivo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getFormato() {
+        return formato;
+    }
+
+    public void setFormato(String formato) {
+        this.formato = formato;
+    }
 }

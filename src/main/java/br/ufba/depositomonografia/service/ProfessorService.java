@@ -1,7 +1,7 @@
 package br.ufba.depositomonografia.service;
 
-import br.ufba.depositomonografia.model.Colecao;
-import br.ufba.depositomonografia.repository.ColecaoRepository;
+import br.ufba.depositomonografia.model.Professor;
+import br.ufba.depositomonografia.repository.ProfessorRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,21 +9,21 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ColecaoService {
+public class ProfessorService {
 
     @Autowired
-    private ColecaoRepository repository;
+    private ProfessorRepository repository;
 
-    public List<Colecao> findAll() {
+    public List<Professor> findAll() {
         return repository.findAll();
     }
 
-    public Colecao findOne(Long id) {
+    public Professor findOne(Long id) {
         return repository.getOne(id);
     }
 
-    public Colecao save(Colecao colecao) {
-        return repository.saveAndFlush(colecao);
+    public Professor save(Professor professor) {
+        return repository.saveAndFlush(professor);
     }
 
     public void delete(Long id) {

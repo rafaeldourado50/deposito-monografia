@@ -4,7 +4,7 @@
 <body>
 <div class="panel panel-default">
     <div class="panel-heading">
-        <strong>Depósitos</strong>
+        <strong>Professores</strong>
     </div>
     <div class="panel-body">
         <div class="table-responsive">
@@ -12,22 +12,22 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Autor</th>
-                    <th>Título</th>
-                    <th>Data</th>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>E-mail</th>
                     <th>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="deposito : ${depositos}">
-                    <td th:text="${deposito.id}"></td>
-                    <td th:text="${deposito.autorNome}"></td>
-                    <td th:text="${deposito.titulo}"></td>
-                    <td th:text="${deposito.anoDefesa}"></td>
+                <tr th:each="professor : ${professores}">
+                    <td th:text="${professor.id}"></td>
+                    <td th:text="${professor.nome}"></td>
+                    <td th:text="${professor.sobrenome}"></td>
+                    <td th:text="${professor.email}"></td>
                     <td>
                         <div class="btn-group pull-right">
-                            <a class="btn btn-sm btn-primary" th:href="@{/deposito/edit/{id}(id=${deposito.id})}" >Editar</a>
-                            <a class="delete btn btn-sm btn-danger" th:href="@{/deposito/delete/{id}(id=${deposito.id})}">Excluir</a>
+                            <a class="btn btn-sm btn-primary" th:href="@{/professor/edit/{id}(id=${professor.id})}" >Editar</a>
+                            <a class="delete btn btn-sm btn-danger" th:href="@{/professor/delete/{id}(id=${professor.id})}">Excluir</a>
                         </div>
                     </td>
                 </tr>
@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="panel-footer">
-        <a class="btn btn-sm btn-success" th:href="@{/deposito/add/}" >Adicionar</a>
+        <a class="btn btn-sm btn-success" th:href="@{/professor/add/}" >Adicionar</a>
     </div>
 </div>
 </body>

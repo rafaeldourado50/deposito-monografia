@@ -10,18 +10,8 @@ import javax.persistence.Table;
 
 import javax.validation.constraints.NotNull;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 @Entity
 @Table(name = "faculdade_instituicao_departamento")
-@Getter
-@EqualsAndHashCode(exclude = {"deposito"})
-@NoArgsConstructor
-@AllArgsConstructor
 public class FaculdadeInstituicaoDepartamento {
 
     @Id
@@ -29,12 +19,42 @@ public class FaculdadeInstituicaoDepartamento {
     private Long id;
 
     @NotNull
-    @Setter
     @ManyToOne
     @JoinColumn(name = "deposito_id")
     private Deposito deposito;
 
     @NotNull
-    @Setter
     private String nome;
+
+    public FaculdadeInstituicaoDepartamento() {
+    }
+
+    public FaculdadeInstituicaoDepartamento(Deposito deposito, String nome) {
+        this.deposito = deposito;
+        this.nome = nome;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Deposito getDeposito() {
+        return deposito;
+    }
+
+    public void setDeposito(Deposito deposito) {
+        this.deposito = deposito;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }

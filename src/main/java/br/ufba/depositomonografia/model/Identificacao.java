@@ -14,18 +14,8 @@ import javax.validation.constraints.NotNull;
 
 import br.ufba.depositomonografia.dominio.TipoIdentificacao;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 @Entity
 @Table(name = "identificacao")
-@Getter
-@EqualsAndHashCode(exclude = {"deposito"})
-@NoArgsConstructor
-@AllArgsConstructor
 public class Identificacao {
 
     @Id
@@ -33,16 +23,54 @@ public class Identificacao {
     private Long id;
 
     @NotNull
-    @Setter
     @ManyToOne
     @JoinColumn(name = "deposito_id")
     private Deposito deposito;
 
     @NotNull
-    @Setter
     @Enumerated(EnumType.STRING)
     private TipoIdentificacao tipo;
 
-    @Setter
     private String descricao;
+
+    public Identificacao() {
+    }
+
+    public Identificacao(Deposito deposito, TipoIdentificacao tipo, String descricao) {
+        this.deposito = deposito;
+        this.tipo = tipo;
+        this.descricao = descricao;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Deposito getDeposito() {
+        return deposito;
+    }
+
+    public void setDeposito(Deposito deposito) {
+        this.deposito = deposito;
+    }
+
+    public TipoIdentificacao getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoIdentificacao tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 }

@@ -1,6 +1,5 @@
 package br.ufba.depositomonografia.model;
 
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,18 +10,8 @@ import javax.persistence.Table;
 
 import javax.validation.constraints.NotNull;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 @Entity
 @Table(name = "co_orientador")
-@Getter
-@EqualsAndHashCode(exclude = {"deposito"})
-@NoArgsConstructor
-@AllArgsConstructor
 public class CoOrientador {
 
     @Id
@@ -30,13 +19,53 @@ public class CoOrientador {
     private Long id;
 
     @NotNull
-    @Setter
     @ManyToOne
     @JoinColumn(name = "deposito_id")
     private Deposito deposito;
 
     @NotNull
-    @Setter
-    @Embedded
-    private Pessoa pessoa;
+    private String nome;
+
+    private String sobrenome;
+
+    public CoOrientador() {
+    }
+
+    public CoOrientador(Deposito deposito, String nome, String sobrenome) {
+        this.deposito = deposito;
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Deposito getDeposito() {
+        return deposito;
+    }
+
+    public void setDeposito(Deposito deposito) {
+        this.deposito = deposito;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
 }
